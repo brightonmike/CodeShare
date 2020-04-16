@@ -1,0 +1,108 @@
+body {
+  color: #57718e;
+}
+
+.MuiLink-underlineHover:hover{
+  text-decoration: none!important;
+}
+
+pre {
+    display: inline-block;
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    padding-right: 10em;
+    padding-top: 3rem;
+    border-radius: 6px;
+    background-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" width="54"…6" r="6" fill="%2327C93F" stroke="%231AAB29" strokeWidth=".5" /></g></svg>');
+    background-repeat: no-repeat;
+    background-position: 16px 16px;
+
+    font-family: Hack, Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+    font-size: 14px;
+    line-height: 1.375;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    background: #fbfcfd;
+    color: #464c53;
+    border: 1px solid #e3e7eb;
+    max-width: 100%;
+}
+
+.MuiCard-root pre {
+  max-height: 400px;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fff;
+}
+
+.hljs,
+.hljs-subst {
+  color: #000;
+}
+
+.hljs-string,
+.hljs-meta,
+.hljs-symbol,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-addition {
+  color: #756bb1;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #636363;
+}
+
+.hljs-number,
+.hljs-regexp,
+.hljs-literal,
+.hljs-bullet,
+.hljs-link {
+  color: #31a354;
+}
+
+.hljs-deletion,
+.hljs-variable {
+  color: #88f;
+}
+
+
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-title,
+.hljs-section,
+.hljs-built_in,
+.hljs-doctag,
+.hljs-type,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-strong {
+  color: #3182bd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-attribute {
+  color: #e6550d;
+}
