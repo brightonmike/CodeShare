@@ -3,7 +3,6 @@ import App from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import { Auth0Provider } from 'use-auth0-hooks';
-import config from "../auth_config.json";
 
 import AppShell from '../components/AppShell';
 import '../styles/global.css';
@@ -17,9 +16,9 @@ class MyApp extends App {
     return (
       <ApolloProvider client={apollo}>
         <Auth0Provider
-          domain={config.domain}
-          client_id={config.clientId}
-          redirect_uri={config.redirect}>
+          domain={process.env.AUTH0_DOMAIN}
+          client_id={process.env.AUTH0_CLIENT_ID}
+          redirect_uri={process.env.AUTH0_REDIRECT}>
             <AppShell content={<Component {...pageProps} />} />
         </Auth0Provider>
       </ApolloProvider>
