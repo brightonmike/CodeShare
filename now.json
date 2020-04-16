@@ -1,0 +1,7 @@
+{
+    "env": {
+        "AUTH0_DOMAIN": "dev-3grc46fr.eu.auth0.com",
+        "AUTH0_CLIENT_ID": "T7xFWHntcIzrIjOeR6Upz9ler07wHbHb",
+        "AUTH0_REDIRECT": "http://localhost:3000/"
+    }
+}
