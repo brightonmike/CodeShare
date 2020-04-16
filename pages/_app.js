@@ -13,6 +13,8 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, apollo } = this.props;
 
+    console.log(process.env);
+
     return (
       <ApolloProvider client={apollo}>
         <Auth0Provider
