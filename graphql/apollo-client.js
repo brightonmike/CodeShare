@@ -4,7 +4,7 @@ import withApollo from 'next-with-apollo';
 import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
 
-const GRAPHQL_URL = 'http://localhost:4000/';
+const GRAPHQL_URL = 'https://code-share-server.now.sh/api/run-server';
 
 const link = createHttpLink({
   fetch,
