@@ -27,3 +27,4 @@ yarn-error.log*
 # Config
 next.config.js
 auth_config.json
+.now
