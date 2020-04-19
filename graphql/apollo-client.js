@@ -4,6 +4,7 @@ import withApollo from 'next-with-apollo';
 import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
 
+let GRAPHQL_URL;
 if (process.env.NODE_ENV === 'production') {
   GRAPHQL_URL = process.env.GRAPHQL_API;
 } else {
