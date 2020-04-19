@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const SNIPPETS_QUERY = gql`
-  query Snippets {
-    getSnippets {
+  query Snippets($filters: [String]) {
+    getSnippets(filters: $filters) {
         title
         author
         userPicture

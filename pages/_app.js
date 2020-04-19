@@ -13,8 +13,6 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, apollo } = this.props;
 
-    console.log(process.env.AUTH0_DOMAIN);
-
     return (
       <ApolloProvider client={apollo}>
         <Auth0Provider

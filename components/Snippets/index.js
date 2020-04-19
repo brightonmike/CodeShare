@@ -10,8 +10,16 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 import Link from '../Link';
+
+import {
+  availableLanguages,
+  availableTypes,
+  availableVersions
+} from '../../languages-config.js';
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +40,14 @@ const useStyles = makeStyles({
   snippetAvatar: {
     marginRight: '20px'
   },
+  filterListClass: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  filterListItemClass: {
+    width: 'auto',
+    paddingLeft: '0'
+  },
   attributes: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -45,18 +61,56 @@ const useStyles = makeStyles({
 });
 
 const Snippets = () => {
-  const { data, loading, error } = useQuery(SNIPPETS_QUERY);
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [filters, setFilters] = useState([]);
+  const { data, loading, error, refetch } = useQuery(SNIPPETS_QUERY, {
+    variables: { filters },
+    pollInterval: 500000,
+  });
+
+  const addFilter = value => {
+    if (!filters.includes(value)) {
+      setFilters([
+        ...filters,
+        value
+      ]);
+    } else {
+      setFilters(filters.filter((filter)=>(filter !== value)));
+      refetch();
+    }
+  };
+
+  const isActive = filter => {
+    return filters.includes(filter) ? 'secondary' : 'default';
+  };
+
+  const languageFilterList = [];
+  for (const value of availableLanguages) {
+    languageFilterList.push(<ListItem className={classes.filterListItemClass} padding={0} margin={10}><Chip
+      avatar={<Avatar>{value.charAt(0)}</Avatar>}
+      label={value}
+      key={value}
+      clickable
+      color={isActive(value)}
+      onClick={() => { addFilter(value) }}
+    /></ListItem>)
+  }
 
   if (loading) {
-      return (
-        <p>Loading..</p>  
-      );
+    return (
+      <p>Loading..</p>  
+    );
   }
 
   return (
     <Grid container spacing={3}>
+
+      <Grid item xs={12}>
+        <List className={classes.filterListClass}>
+            {languageFilterList}
+        </List>
+      </Grid>
+
       {data && data.getSnippets.map(snippet => {
           return <Grid item xs={12} sm={6} md={3} key={`snippet__${snippet._id}`}>
             <Link href="/snippet/[sid]" as={`/snippet/${snippet._id}`}>

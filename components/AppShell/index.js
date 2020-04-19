@@ -136,9 +136,6 @@ const AppShell = (props) => {
                 <AddSnippet user={user} />
                 {[
                   { label: 'All Code', uri: '/' },
-                  { label: 'Backend', uri: '/backend' },
-                  { label: 'Frontend', uri: '/frontend' },
-                  { label: 'CLI', uri: '/cli' },
                 ].map((link, index) => (
                   <Link href={link.uri} key={link.label}>
                     <ListItem button>

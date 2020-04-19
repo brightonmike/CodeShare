@@ -26,6 +26,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import PillRenderer from '../PillRenderer';
 
+import {
+  availableLanguages,
+  availableTypes,
+  availableVersions
+} from '../../languages-config.js';
+
 const useStyles = makeStyles({
   attributes: {
     display: 'flex',
@@ -121,36 +127,6 @@ export default function AddSnippet(props) {
     resetVersions();
     setOpen(false);
   };
-
-
-  const availableLanguages = [
-    'PHP',
-    'JavaScript',
-    'CSS',
-    'HTML',
-    'CLI',
-    'Node.js',
-    'SQL',
-    'GraphQL',
-    'XML'
-  ];
-
-  const availableTypes = [
-    'Plugin',
-    'UIComponent',
-    'Knockout Component',
-    'Layout',
-    'Class',
-    'Factory'
-  ];
-
-  const availableVersions = [
-    '2.2.4',
-    '2.2.5',
-    '2.3.0',
-    '2.3.1',
-    '2.3.2'
-  ];
 
   return (
     <>
