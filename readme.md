@@ -2,7 +2,7 @@
 
 You will need to sign up for a free MongoDB instance over at: https://mlab.com/.
 
-Create a new database and store the MongoDb URI in a `.env` file e.g `DB_URL=mongodb://<dbuser>:<dbpassword>@ds255309.mlab.com:55309/genecodeshare`.
+Create a new database and store the MongoDb URI in a `.env` file e.g `DB_URL=mongodb://<dbuser>:<dbpassword>@ds255309.mlab.com:55309/databasename`.
 
 You should add a collection called snippets.
 
