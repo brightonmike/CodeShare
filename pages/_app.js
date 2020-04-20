@@ -14,7 +14,7 @@ class MyApp extends App {
     const { Component, pageProps, apollo } = this.props;
 
     console.log('process?');
-    console.log(process.env);
+    console.log(process.env.AUTH0_DOMAIN);
 
     return (
       <ApolloProvider client={apollo}>
