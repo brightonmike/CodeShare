@@ -1,12 +1,4 @@
 {
-  "name": "now-env-vars",
-  "version": 2,
-  "builds": [
-      {
-      "src": "package.json",
-      "use": "@now/next"
-      }
-  ],
   "env": {
     "AUTH0_DOMAIN": "@auth-0-domain-production-68f1",
     "AUTH0_CLIENT_ID": "@auth-0-client-id-production-2dag",
@@ -15,10 +7,10 @@
   },
   "build": {
     "env": {
-        "AUTH0_DOMAIN": "@auth-0-domain-production-68f1",
-        "AUTH0_CLIENT_ID": "@auth-0-client-id-production-2dag",
-        "AUTH0_REDIRECT": "@auth-0-redirect-production-iyz3",
-        "GRAPHQL_API": "@graphql-api-production-lxr3"
+      "AUTH0_DOMAIN": "@auth-0-domain-production-68f1",
+      "AUTH0_CLIENT_ID": "@auth-0-client-id-production-2dag",
+      "AUTH0_REDIRECT": "@auth-0-redirect-production-iyz3",
+      "GRAPHQL_API": "@graphql-api-production-lxr3"
     }
   }
 }
