@@ -13,6 +13,7 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, apollo } = this.props;
 
+    console.log('process?');
     console.log(process.env);
 
     return (
