@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TextField from '@material-ui/core/TextField';
 
 import { codeFormatter } from '../../hooks/code-formatter';
 
@@ -53,7 +54,7 @@ const Snippet = props => {
 
     if (document.queryCommandSupported('copy')) {
       const copyText = new Promise((resolve, reject) => {
-        const innerText = document.querySelector('#snippet');
+        const innerText = document.querySelector('#code');
         innerText.select();
         try {
           const result = document.execCommand('copy');
@@ -129,6 +130,17 @@ const Snippet = props => {
             </CardContent>
             <CardContent>
               <pre><code dangerouslySetInnerHTML={codeFormatter(snippet.code)}></code></pre>
+              <TextField
+                  multiline
+                  variant="outlined"
+                  margin="dense"
+                  id="code"
+                  rows="5"
+                  label="Code"
+                  type="text"
+                  fullWidth
+                  value={snippet.code}
+              />
             </CardContent>
           </CardActionArea>
         </Card>
