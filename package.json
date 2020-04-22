@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && echo AUTH DOMAIN: $AUTH0_DOMAIN",
+    "build-flat": "next build && next export && echo AUTH DOMAIN: $AUTH0_DOMAIN",
     "serve": "node server/index.js",
     "start": "next start"
   },
