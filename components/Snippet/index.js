@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -10,13 +10,14 @@ import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
+import Alert from '../../components/Alert';
 
 import { codeFormatter } from '../../hooks/code-formatter';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 1200,
-    maxWidth: '100%',
+    maxWidth: '800px',
   },
   media: {
     height: 140,
@@ -25,6 +26,11 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     marginBottom: '20px',
+  },
+  textarea: {
+    color: 'white',
+    height: '1px',
+    border: 'none'
   },
   snippetAvatar: {
     marginRight: '20px'
@@ -42,6 +48,7 @@ const useStyles = makeStyles({
 const Snippet = props => {
   const { snippet } = props;
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   if (!snippet || !snippet.code) {
       return (
@@ -49,8 +56,12 @@ const Snippet = props => {
       );
   }
 
-  const copyCode = () => {
-    // e.persist();
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const copyCode = (e) => {
+    e.persist();
 
     if (document.queryCommandSupported('copy')) {
       const copyText = new Promise((resolve, reject) => {
@@ -65,7 +76,7 @@ const Snippet = props => {
       });
 
       copyText.then(result => {
-        console.log(result);
+        setOpen(true);
       }).catch(err => {
         console.log(err);
       });
@@ -74,17 +85,20 @@ const Snippet = props => {
 
   return (
     <Grid container spacing={3}>
+      <Alert open={open} title="Code copied!" close={() => handleClose()} />
       {snippet &&
         <Card id={snippet._id} className={classes.root} width={1000} key={`snippet__${snippet._id}`}>
-          <CardActionArea>
+          <CardActionArea onClick={(e) => copyCode(e)}>
             <CardContent>
               <div className={classes.snippetHeader}>
-                <Avatar className={classes.snippetAvatar} src={snippet.userPicture}></Avatar>
+                  <Avatar className={classes.snippetAvatar} src={snippet.userPicture}></Avatar>
                 <div>
                   <Typography variant="h5" component="h2">{snippet.title}</Typography>
                   <Typography variant="subtitle1">{snippet.author}</Typography>
                 </div>
               </div>
+
+              {/* <button>copy</button> */}
 
               <p dangerouslySetInnerHTML={{__html:snippet.comments}}/>
 
@@ -139,6 +153,7 @@ const Snippet = props => {
                   label="Code"
                   type="text"
                   fullWidth
+                  className={classes.textarea}
                   value={snippet.code}
               />
             </CardContent>
