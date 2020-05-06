@@ -25,9 +25,13 @@ export const useInputArray = initialValue => {
     reset: () => setValues([]),
     bind: {
       values,
-      onChange: value => {
-        setValues([...values, ...[value]]);
-        console.log(values);
+      onChange: value => {        
+        if (values.includes(value)) {
+          var newValues = values.filter(e => e !== value);
+          setValues([...newValues]);
+        } else {
+          setValues([...values, ...[value]]);
+        }
       }
     }
   };

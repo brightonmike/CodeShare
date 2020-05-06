@@ -89,7 +89,7 @@ const Snippets = () => {
     languageFilterList.push(<ListItem className={classes.filterListItemClass} padding={0} margin={10}><Chip
       avatar={<Avatar>{value.charAt(0)}</Avatar>}
       label={value}
-      key={value}
+      key={`${value}-filter`}
       clickable
       color={isActive(value)}
       onClick={() => { addFilter(value) }}
@@ -132,7 +132,7 @@ const Snippets = () => {
                             size="small"
                             avatar={<Avatar>{language.charAt(0)}</Avatar>}
                             label={language}
-                            key={language}
+                            key={`${snippet._id}-${language}`}
                             color="secondary"
                           />
                         })
@@ -145,7 +145,7 @@ const Snippets = () => {
                             size="small"
                             avatar={<Avatar>{version}</Avatar>}
                             label={version}
-                            key={version}
+                            key={`${snippet._id}-${version}`}
                           />
                         })
                       }
@@ -157,7 +157,7 @@ const Snippets = () => {
                             size="small"
                             avatar={<Avatar>{type.charAt(0) + type.charAt(1)}</Avatar>}
                             label={type}
-                            key={type}
+                            key={`${snippet._id}-${type}`}
                           />
                         })
                       }

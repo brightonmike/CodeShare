@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Chip from '@material-ui/core/Chip';
@@ -6,6 +6,8 @@ import Avatar from '@material-ui/core/Avatar';
 
 export default function PillRenderer(props) {
   const { type = '', items = [], values = [], onChange } = props;
+
+  console.log(type);
 
   const isActive = value => {
     return values.includes(value) ? 'secondary' : 'default';
@@ -17,7 +19,7 @@ export default function PillRenderer(props) {
       size="small"
       avatar={<Avatar>{value.charAt(0)}</Avatar>}
       label={value}
-      key={value}
+      key={type + value}
       clickable
       color={isActive(value)}
       onClick={() => { onChange(value) }}
