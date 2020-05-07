@@ -7,8 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 export default function PillRenderer(props) {
   const { type = '', items = [], values = [], onChange } = props;
 
-  console.log(type);
-
   const isActive = value => {
     return values.includes(value) ? 'secondary' : 'default';
   };

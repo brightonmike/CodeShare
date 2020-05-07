@@ -1,7 +1,7 @@
-import Head from 'next/head';
-import React from 'react';
-import { withAuth } from 'use-auth0-hooks';
-import { useAuth } from 'use-auth0-hooks';
+import React, { useState } from 'react';
+import { withAuth, useAuth } from 'use-auth0-hooks';
+import { useQuery } from '@apollo/react-hooks';
+import SNIPPETS_QUERY from '../../graphql/queries/snippets.query';
 
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -79,6 +79,25 @@ const AppShell = (props) => {
   const { user } = auth;
   const classes = useStyles();
   const { isAuthenticated, logout } = useAuth();
+
+  const [filters, setFilters] = useState([]);
+  const { data = {}, loading, error, refetch } = useQuery(SNIPPETS_QUERY, {
+    variables: { filters },
+    pollInterval: 500000,
+  });
+  const { getSnippets = [] } = data;
+  
+  const setFilter = value => {
+    if (!filters.includes(value)) {
+      setFilters([
+        ...filters,
+        value
+      ]);
+    } else {
+      setFilters(filters.filter((filter)=>(filter !== value)));
+      refetch();
+    }
+  };
   
   const theme = React.useMemo(
     () =>
@@ -133,7 +152,7 @@ const AppShell = (props) => {
               <div className={classes.toolbar} />
               <Divider />          
               <List>            
-                <AddSnippet user={user} />
+                <AddSnippet user={user} filters={filters} />
                 {[
                   { label: 'All Code', uri: '/' },
                 ].map((link, index) => (
@@ -159,7 +178,12 @@ const AppShell = (props) => {
           }
           <main className={classes.content}>
             <div className={classes.toolbar} />
-            {props.content}
+            {React.cloneElement(props.content, {
+              loading,
+              snippets: getSnippets,
+              setFilter,
+              filters
+            })}
           </main>
         </div>
       </ThemeProvider>

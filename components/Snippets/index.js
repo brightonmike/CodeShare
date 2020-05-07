@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import SNIPPETS_QUERY from '../../graphql/queries/snippets.query';
-
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -60,25 +57,11 @@ const useStyles = makeStyles({
   }
 });
 
-const Snippets = () => {
+const Snippets = (props) => {
   const classes = useStyles();
-  const [filters, setFilters] = useState([]);
-  const { data, loading, error, refetch } = useQuery(SNIPPETS_QUERY, {
-    variables: { filters },
-    pollInterval: 500000,
-  });
+  const { setFilter = () => {}, filters = [], snippets, loading } = props;
 
-  const addFilter = value => {
-    if (!filters.includes(value)) {
-      setFilters([
-        ...filters,
-        value
-      ]);
-    } else {
-      setFilters(filters.filter((filter)=>(filter !== value)));
-      refetch();
-    }
-  };
+  console.log(filters);
 
   const isActive = filter => {
     return filters.includes(filter) ? 'secondary' : 'default';
@@ -92,7 +75,7 @@ const Snippets = () => {
       key={`${value}-filter`}
       clickable
       color={isActive(value)}
-      onClick={() => { addFilter(value) }}
+      onClick={() => { setFilter(value) }}
     /></ListItem>)
   }
 
@@ -111,7 +94,7 @@ const Snippets = () => {
         </List>
       </Grid>
 
-      {data && data.getSnippets.map(snippet => {
+      {snippets && snippets.map(snippet => {
           return <Grid item xs={12} sm={6} md={3} key={`snippet__${snippet._id}`}>
             <Link href="/snippet/[sid]" as={`/snippet/${snippet._id}`}>
               <Card className={classes.root} width={286}>

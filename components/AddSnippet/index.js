@@ -67,8 +67,11 @@ export default function AddSnippet(props) {
       name: username,
       email: useremail,
       picture: userPicture
-    } = {}
+    } = {},
+    filters = []
   } = props;
+
+  console.log(filters);
 
   let haveUsername = false;
   if (username) { haveUsername = true; }
@@ -81,20 +84,12 @@ export default function AddSnippet(props) {
   const { values:languages, bind:bindLanguages, reset:resetLanguages } = useInputArray([]);
   const { values:versions, bind:bindVersions, reset:resetVersions } = useInputArray([]);
   const { values:types, bind:bindTypes, reset:resetTypes } = useInputArray([]);
-
+  
   const [addSnippet] = useMutation(
-    SNIPPET_ADD,
-    {
-      update(cache, { data: { addSnippet } }) {
-        const { getSnippets } = cache.readQuery({ query: SNIPPETS_QUERY });
-
-        cache.writeQuery({
-          query: SNIPPETS_QUERY,
-          data: { getSnippets: getSnippets.concat([addSnippet]) },
-        });
-      }
-    }
-  );
+    SNIPPET_ADD, {
+      refetchQueries: [{query: SNIPPETS_QUERY, variables: { filters }}],
+      awaitRefetchQueries: true,
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -120,7 +115,6 @@ export default function AddSnippet(props) {
 
     resetTitle();
     resetCode();
-    resetAuthor();
     resetComments();
     resetLanguages();
     resetTypes();

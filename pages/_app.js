@@ -3,20 +3,13 @@ import App from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import { Auth0Provider } from 'use-auth0-hooks';
-
 import AppShell from '../components/AppShell';
 import '../styles/global.css';
 
 import withData from '../graphql/apollo-client';
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps, apollo } = this.props;
-
-    console.log('process?');
-    console.log(process.env.AUTH0_DOMAIN);
-
-    return (
+function MyApp({ Component, pageProps, apollo }) {
+  return (
       <ApolloProvider client={apollo}>
         <Auth0Provider
           domain={process.env.AUTH0_DOMAIN}
@@ -25,9 +18,7 @@ class MyApp extends App {
             <AppShell content={<Component {...pageProps} />} />
         </Auth0Provider>
       </ApolloProvider>
-    );
-  }
+  )
 }
 
-// Wraps all components in the tree with the data provider
 export default withData(MyApp);

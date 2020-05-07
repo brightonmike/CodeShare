@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -42,7 +42,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Home = () => {
+const Home = (props) => {
+  const { setFilter = () => {}, filters = [], snippets, loading } = props;
   const classes = useStyles();
   const { pathname, query } = useRouter();
   const { isAuthenticated, login } = useAuth();
@@ -53,7 +54,7 @@ const Home = () => {
         <title>Home | Gene Code Share</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isAuthenticated && <Snippets/>}
+      {isAuthenticated && <Snippets loading={loading} snippets={snippets} setFilter={setFilter} filters={filters}/>}
       {!isAuthenticated &&
         <div className={classes.root}>
           <main className={classes.content}>
