@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withAuth, useAuth } from 'use-auth0-hooks';
 import { useQuery } from '@apollo/react-hooks';
+
 import SNIPPETS_QUERY from '../../graphql/queries/snippets.query';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -84,7 +85,7 @@ const AppShell = (props) => {
   const { data = {}, loading, error, refetch } = useQuery(SNIPPETS_QUERY, {
     variables: { filters },
     pollInterval: 500000,
-  });
+  });  
   const { getSnippets = [] } = data;
   
   const setFilter = value => {
@@ -155,6 +156,7 @@ const AppShell = (props) => {
                 <AddSnippet user={user} filters={filters} />
                 {[
                   { label: 'All Code', uri: '/' },
+                  { label: 'Groups', uri: '/groups' },
                 ].map((link, index) => (
                   <Link href={link.uri} key={link.label}>
                     <ListItem button>

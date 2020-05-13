@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
@@ -16,7 +15,7 @@ import { codeFormatter } from '../../hooks/code-formatter';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 1200,
+    minWidth: 200,
     maxWidth: '800px',
   },
   media: {
@@ -84,7 +83,7 @@ const Snippet = props => {
   }
 
   return (
-    <Grid container spacing={3}>
+    <>
       <Alert open={open} title="Code copied!" close={() => handleClose()} />
       {snippet &&
         <Card id={snippet._id} className={classes.root} width={1000} key={`snippet__${snippet._id}`}>
@@ -160,7 +159,7 @@ const Snippet = props => {
           </CardActionArea>
         </Card>
       }
-    </Grid>
+    </>
   );
 };
 

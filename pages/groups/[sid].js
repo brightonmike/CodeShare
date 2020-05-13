@@ -3,15 +3,13 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 import { useQuery } from '@apollo/react-hooks';
-import SNIPPET_QUERY from '../../graphql/queries/snippet.query';
+import GROUP_QUERY from '../../graphql/queries/group.query';
+import Group from '../../components/Group';
 
-import Grid from '@material-ui/core/Grid';
-import Snippet from '../../components/Snippet';
-
-const SnippetPage = () => {
+const GroupPage = () => {
   const router = useRouter();
   const { sid } = router.query;
-   const { data: { getSnippet = {} } = {}, loading, error } = useQuery(SNIPPET_QUERY, {
+   const { data: { getGroup = {} } = {}, loading, error } = useQuery(GROUP_QUERY, {
      variables: { id: sid },
    });
 
@@ -21,11 +19,9 @@ const SnippetPage = () => {
         <title>Snippet | Gene Code Share</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid container spacing={3}>
-        <Snippet snippet={getSnippet}/>
-      </Grid>
+      <Group group={getGroup} />
     </div>
   );
 };
 
-export default SnippetPage;
+export default GroupPage;
